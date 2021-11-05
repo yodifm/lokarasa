@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="try.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" id="card1">
+        <div class="content">
+            <div class="imgBx">
+                <img src="image/logo1" alt="">
+            </div>
+            <h2>someone famous<br><span>website designer</span></h2>
+        </div>
+        <ul class="navigation">
+            <li>
+                <ion-icon name="person-outline"></ion-icon>
+                <a href="#">Edit Profile</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Inobx</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Setting</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Support</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+        <div class="toggle" id="toggle_1">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="card" id="card2">
+        <div class="content">
+            <div class="imgBx">
+                <img src="image/logo1" alt="">
+            </div>
+            <h2>someone famous<br><span>website designer</span></h2>
+        </div>
+        <ul class="navigation">
+            <li>
+                <ion-icon name="person-outline"></ion-icon>
+                <a href="#">Edit Profile</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Inobx</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Setting</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Support</a>
+            </li>
+            <li>
+                <ion-icon name="chatbox-outline"></ion-icon>
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+        <div class="toggle" id="toggle_2">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+    </div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+    // const card = document.querySelector('#card1');
+    // const cardtoggle = document.querySelector('#toggle1');
+
+    // const card = document.querySelector('#card2');
+    // const cardtoggle = document.querySelector('#toggle2');
+    // cardtoggle.onclick = function()
+    // {
+    //     card.classList.toggle('active');
+    // }
+
+    $(document).on('click','.toggle',function(){
+        console.log('asd')
+       var id = $(this).attr('id');
+       var split_id = id.split('_');
+       var num = split_id[1];
+
+       $('#card'+num).toggleClass('active');
+    });
+</script>
+</body>
+</html>
