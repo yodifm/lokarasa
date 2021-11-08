@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokarasa Spices</title>
+    <link rel="icon" href="images/Logo3.png">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+   
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    
+ <style>
+     
+ 
+/* card */
+.card{
+    position: relative;
+    width: 600px;
+    height: 130px;
+    /* height: 400px; */
+    background: #fff;
+    box-shadow: 0 50px 50px rgba(0,0,0,0.2);
+    padding: 20px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+    display: inline-block;
+    /* white-space: nowrap; */
+    /* margin-left: 220; */
+    
+    
+}
+
+.card.active
+{
+    height: 400px;
+}
+
+.card .content
+{
+    display: flex;
+    align-items: center;
+}
+
+.card .content .imgBx
+{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 0%;
+    overflow: hidden;
+}
+
+.card .content .imgBx img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .content h2
+{
+    margin-left: 15px;
+    font-size: 2rem;
+    color: #111;
+}
+
+.card .content h2 span
+{
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #999;
+}
+
+.navigation
+{
+    position: relative;
+    top: 25px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 20px 0;
+}
+
+.navigation li
+{
+    list-style: none;
+    margin: 15px 0;
+}
+
+.navigation li a
+{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    color: #555;
+    transition: 0.25s;
+}
+
+.navigation li a:hover
+{
+    color: #36b3ff;
+}
+
+.navigation li a ion-icon
+{
+    font-size: 1.6em;
+    margin-right: 15px;
+}
+
+.toggle
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: #36b3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.toggle ion-icon
+{
+    color: #fff;
+    font-size: 1.4em;
+    transition: ease-in-out 0.5s;
+}
+
+.card.active .toggle ion-icon
+{
+    transform: rotate(180deg);
+}
+
+a {
+  color: #000;
+}
+
+/* header */
+
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+  color: black;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+.btn_product{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn_product:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.tabcard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#card1, #card3
+{
+  margin-right: 100px;
+}
+
+.buttona1 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 7px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  /* margin-left: 150px; */
+}
+
+.button1a {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1a:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+ </style>
+</head>
+
+<body>
+  
+
+
+    <!-- header section starts  -->
+
+    <a href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202." class="floata" target="_blank">
+        <i class="fa fa-whatsapp my-floata"></i>
+        </a>
+
+
+        
+        <header class="header" >
+            <a href="#" class="logo"><img src="images/logo_fix.png" style="height: 50px;" alt=""></a>
+            <div id="menu-bar" class="fas fa-bars"></div>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+          <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+          <ul class="menu">
+            <li><a href="#work" style="font-size: 15px;">Home</a></li>
+            <li><a href="#about" style="font-size: 15px;">Speciality</a></li>
+            <li><a href="#careers" style="font-size: 15px;">Popular</a></li>
+            <li><a href="#contact" style="font-size: 15px;">Gallery</a></li>
+            <li><a href="#contact" style="font-size: 15px;">Review</a></li>
+            <li><a href="#contact" style="font-size: 15px;">Order</a></li>
+          </ul>
+        </header>
+    
+    <div class="banner-area">
+        
+        <div>
+            <img src="images/Banner2.png" alt=""  usemap="#planetmap">
+        </div>
+    </div>
+    <map id="planetmap" name="planetmap">
+      <area shape="rect" coords="1719,620,1537,554" alt="Contact" href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202."  target="_blank">
+      <area shape="rect" coords="1553,683,1741,736" alt="location" href="moon.htm">
+      <area shape="rect" coords="341,879,378,918" alt="ig" href="https://www.instagram.com/lokarasaspices/" target="_blank">
+      <area shape="rect" coords="261,879,298,918" alt="fb" href="fb.htm">
+      <area shape="rect" coords="181,877,218,916" alt="link" href="https://www.linkedin.com/in/lokarasa-group-5a6a97221/"  target="_blank">
+     
+      
+      </map>
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <section class="speciality" id="speciality">
+
+        <h1 class="heading">  <span> </span> </h1>
+
+        <div class="box-container" >
+
+            <div class="box" style="z-index:-2" >
+                <img class="image" src="images/header/1.jpg" alt="" >
+                <div class="content">
+                    <img src="images/certificate.png" alt="">
+                    <h3>Certificate</h3>
+                    <p>Organic farm products certified</p>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" > 
+                <img class="image" src="images/header/2.jpg" alt="">
+                <div class="content">
+                    <img src="images/quality.png" alt="">
+                    <h3>Best Quality</h3>
+                    <p>Profesionally Farmed and Sorted</p>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" > 
+                <img class="image" src="images/header/3.jpg" alt="">
+                <div class="content">
+                    <img src="images/fresh.png" alt="">
+                    <h3>Fresh Product</h3>
+                    <p>Freshly Harvested</p>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" > 
+                <img class="image" src="images/header/4.jpg" alt="">
+                <div class="content">
+                    <img src="images/export.png" alt="">
+                    <h3>Export Quality</h3>
+                    <p>Buyer Requested</p>
+                </div>
+            </div>
+            
+           
+
+        </div>
+
+    </section>
+    <br><br><br><br><br>
+
+    <h1 class="heading"> <span> Our Product </span> </h1>
+    <div class="tabcard">
+      <div class="card" id="card1">
+        <div class="content">
+            <div class="imgBx">
+                <img src="images/product/1.jpg" alt="">
+            </div>
+            <h2>Giant Ginger<br><span>Organic and Non-Organic</span></h2>
+        </div>
+        <ul class="navigation">
+          <p>Spesification: </p>
+            <li>
+               <p>- Weight 1.5 - 2.0 kg per clump</p>
+            </li>
+            <li>
+                <p>- Moisture content 11-13%</p>
+            </li>
+            <li>
+                <p>- Whole ginger</p>
+            </li>
+            
+            <a href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202." target="_blank"" class="buttona1 button1a ">Order Now</a>
+
+        </ul>
+        <div class="toggle" id="toggle_1">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+    </div>
+  
+    <div class="card" id="card2">
+      <div class="content">
+          <div class="imgBx">
+              <img src="images/product/1.jpg" alt="">
+          </div>
+          <h2>Red ginger<br><span>Organic and Non-Organic</span></h2>
+      </div>
+      <ul class="navigation">
+        <p>Spesification: </p>
+        <li>
+           <p>- Weight 500 - 700 gr per clump</p>
+        </li>
+        <li>
+            <p>- 12-14% water content</p>
+        </li>
+        <li>
+            <p>- Ginger rhizome is clean</p>
+        </li>
+          <a href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202." target="_blank"" class="buttona1 button1a ">Order Now</a>
+
+      </ul>
+      <div class="toggle" id="toggle_2">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+      </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class="tabcard">
+<div class="card" id="card3" >
+  <div class="content">
+      <div class="imgBx">
+          <img src="images/product/1.jpg" alt="">
+      </div>
+      <h2>Regular Ginger<br><span>Non-Organic</span></h2>
+  </div>
+  <ul class="navigation">
+    <p>Spesification: </p>
+    <li>
+       <p>- Weight 500 - 700 gr</p>
+    </li>
+    <li>
+        <p>- 12-14% water content</p>
+    </li>
+    <li>
+        <p>- Ginger rhizome not broken</p>
+    </li>
+       <a href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202." target="_blank"" class="buttona1 button1a ">Order Now</a>
+
+  </ul>
+  <div class="toggle" id="toggle_3">
+      <ion-icon name="chevron-down-outline"></ion-icon>
+  </div>
+</div>
+
+  <div class="card" id="card4" >
+    <div class="content">
+        <div class="imgBx">
+            <img src="images/product/1.jpg" alt="">
+        </div>
+        <h2>someone famous<br><span>website designer</span></h2>
+    </div>
+    <ul class="navigation">
+        <li>
+            <ion-icon name="person-outline"></ion-icon>
+            <a href="#">Edit Profile</a>
+        </li>
+        <li>
+            <ion-icon name="chatbox-outline"></ion-icon>
+            <a href="#">Inobx</a>
+        </li>
+        <li>
+            <ion-icon name="chatbox-outline"></ion-icon>
+            <a href="#">Setting</a>
+        </li>
+        <li>
+            <ion-icon name="chatbox-outline"></ion-icon>
+            <a href="#">Support</a>
+        </li>
+        <li>
+            <ion-icon name="chatbox-outline"></ion-icon>
+            <a href="#">Logout</a>
+        </li>
+           <a href="https://api.whatsapp.com/send?phone=6282213172548&text=Halo%21%20Saya%20tertarik%20dengan%20product%20anda%202." target="_blank"" class="buttona1 button1a ">Order Now</a>
+
+      </ul>
+    <div class="toggle" id="toggle_4">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+    </div>
+</div>
+</div>
+
+   
+
+    
+
+    <section class="gallery" id="gallery">
+
+        <h1 class="heading"> <span> our gallery </span> </h1>
+
+        <div class="box-container">
+
+            <div class="box" style="z-index:-2" data-aos="zoom-in" data-aos-duration="500">
+                <img src="images/header/1.jpg" alt="">
+                <div class="content"> <br><br><br>
+                    
+                    <a href="#" class="btn">order now</a>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" data-aos="zoom-in" data-aos-duration="600">
+                <img src="images/header/2.jpg" alt="">
+                <div class="content"> <br><br><br>
+                    
+                    <a href="#" class="btn">order now</a>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" data-aos="zoom-in" data-aos-duration="700">
+                <img src="images/header/4.jpg" alt="">
+                <div class="content"> <br><br><br>
+                    
+                    <a href="#" class="btn">order now</a>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" data-aos="zoom-in" data-aos-duration="800">
+                <img src="images/header/3.jpg" alt="">
+                <div class="content"> <br><br><br>
+                    
+                    <a href="#" class="btn">order now</a>
+                </div>
+            </div>
+            <div class="box" style="z-index:-2" data-aos="zoom-in" data-aos-duration="900">
+                <img src="images/header/5.jpg" alt="">
+                <div class="content"> <br><br><br>
+                    
+                    <a href="#" class="btn">order now</a>
+                </div>
+            </div>
+           
+
+        </div>
+
+    </section>
+   
+
+    <section class="order" id="order" data-aos="zoom-in" data-aos-duration="600">
+
+        <h1 class="heading"> <span>Order Now</span> </h1>
+
+        <div class="row">
+
+            <div class="image">
+                <img src="images/header/kolase.png" alt="">
+            </div>
+
+            <form action="order.php" method="POST" target="_blank" >
+
+                <div class="inputBox">
+                    <input type="text" placeholder="name" name="name">
+                    <input type="email" placeholder="email" name="email">
+                </div>
+
+                <div class="inputBox">
+                    <input type="number" placeholder="phone" name="phone">
+                    <input type="text" placeholder="type of ginger" name="ginger">
+                </div>
+
+                <textarea placeholder="address" name="address" id="address" cols="30" rows="10"></textarea>
+
+                <input type="submit" name="submit" value="order now" class="btn">
+
+            </form>
+
+        </div>
+
+    </section>
+
+   
+
+    <section class="footer">
+
+        <div class="share">
+            <a href="#" class="btn">facebook</a>
+            <a href="#" class="btn">instagram</a>
+            <a href="#" class="btn">linkedin</a>
+        </div>
+
+        <h1 class="credit"> created by <span> Lokarasa Spices</span> | all rights reserved! </h1>
+
+    </section>
+
+    <!-- scroll top button  -->
+
+
+    <!-- loader  -->
+    <div class="loader-container">
+    </div>
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+    <!-- custom js file link  -->
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+    <script>
+        const carouselFrame = document.querySelector('.carousel-frame');
+const carouselSlide = document.querySelector('.carousel-slide');
+const carouselImages = getImagesPlusClones();
+const prevBtn = document.querySelector('.carousel-prev');
+const nextBtn = document.querySelector('.carousel-next');
+const navDots = Array.from(document.querySelectorAll('.carousel-dots li'));
+
+let imageCounter = 1;
+
+function getImagesPlusClones() {
+  let images = document.querySelectorAll('.carousel-slide img');
+
+  const firstClone = images[0].cloneNode();
+  const lastClone = images[images.length - 1].cloneNode();
+
+  firstClone.className = 'first-clone';
+  lastClone.className = 'last-clone';
+
+  // we need clones to make an infinite loop effect
+  carouselSlide.append(firstClone);
+  carouselSlide.prepend(lastClone);
+
+  // must reassign images to include the newly cloned images
+  images = document.querySelectorAll('.carousel-slide img');
+
+  return images;
+}
+
+function initializeNavDots() {
+  if (navDots.length) navDots[0].classList.add('active-dot');
+}
+
+function initializeCarousel() {
+  carouselSlide.style.transform = 'translateX(-100%)';
+}
+
+function slideForward() {
+  // first limit counter to prevent fast-change bugs
+  if (imageCounter >= carouselImages.length - 1) return;
+  carouselSlide.style.transition = 'transform 500ms';
+  imageCounter++;
+  carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+}
+
+function slideBack() {
+  // first limit counter to prevent fast-change bugs
+  if (imageCounter <= 0) return;
+  carouselSlide.style.transition = 'transform 500ms';
+  imageCounter--;
+  carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+}
+
+function makeLoop() {
+  // instantly move from clones to originals to produce 'infinite-loop' effect
+  if (carouselImages[imageCounter].classList.contains('last-clone')) {
+    carouselSlide.style.transition = 'none';
+    imageCounter = carouselImages.length - 2;
+    carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+  }
+
+  if (carouselImages[imageCounter].classList.contains('first-clone')) {
+    carouselSlide.style.transition = 'none';
+    imageCounter = carouselImages.length - imageCounter;
+    carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+  }
+}
+
+function goToImage(e) {
+  carouselSlide.style.transition = 'transform 500ms';
+  imageCounter = 1 + navDots.indexOf(e.target);
+  carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+}
+
+function highlightCurrentDot() {
+  navDots.forEach((dot) => {
+    if (navDots.indexOf(dot) === imageCounter - 1) {
+      dot.classList.add('active-dot');
+    } else {
+      dot.classList.remove('active-dot');
+    }
+  });
+}
+
+function addBtnListeners() {
+  nextBtn.addEventListener('click', slideForward);
+  prevBtn.addEventListener('click', slideBack);
+}
+
+function addNavDotListeners() {
+  navDots.forEach((dot) => {
+    dot.addEventListener('click', goToImage);
+  });
+}
+
+function addTransitionListener() {
+  carouselSlide.addEventListener('transitionend', () => {
+    makeLoop();
+    highlightCurrentDot();
+  });
+}
+
+function autoAdvance() {
+  let play = setInterval(slideForward, 5000);
+
+  carouselFrame.addEventListener('mouseover', () => {
+    clearInterval(play); // pause when mouse enters carousel
+  });
+
+  carouselFrame.addEventListener('mouseout', () => {
+    play = setInterval(slideForward, 5000); // resume when mouse leaves carousel
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(play); // pause when user leaves page
+    } else {
+      play = setInterval(slideForward, 5000); // resume when user returns to page
+    }
+  });
+}
+
+function buildCarousel() {
+  initializeCarousel();
+  initializeNavDots();
+  addNavDotListeners();
+  addBtnListeners();
+  addTransitionListener();
+  autoAdvance();
+}
+
+buildCarousel();
+    </script>
+
+ <script>
+
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("header").style.top = "0";
+  } else {
+    document.getElementById("header").style.top = "-50px";
+  }
+  prevScrollpos = currentScrollPos;
+}
+
+ 
+</script>
+   
+<script>
+
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("header").style.top = "0";
+    } else {
+      document.getElementById("header").style.top = "-50px";
+    }
+    prevScrollpos = currentScrollPos;
+  }
+  
+  $(document).on('click','.toggle',function(){
+          console.log('asd')
+         var id = $(this).attr('id');
+         var split_id = id.split('_');
+         var num = split_id[1];
+  
+         $('#card'+num).toggleClass('active');
+      });
+  </script>
+
+</body>
+
+</html>
